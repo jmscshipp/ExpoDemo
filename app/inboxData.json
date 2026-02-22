@@ -1,0 +1,11 @@
+{
+  "inbox": [
+    [
+      {"name":"Bob","message":"Hi Alice! How are you?","seen":["Bob"],"timestamp":1771322460000},
+      {"name":"Alice","message":"Hello!","seen":["Alice","Bob"],"timestamp":1771322400000}
+    ],
+    [
+      {"name":"Carol","message":"Hi, I'm new here","seen":[],"timestamp":1771479370607}
+    ]
+  ]
+}

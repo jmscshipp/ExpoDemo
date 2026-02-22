@@ -1,0 +1,48 @@
+// types for the initial format of the JSON file
+export type RawData = {
+  inbox: RawMessage[][];
+};
+
+export type RawMessage = {
+  name: string;
+  message: string;
+  seen: string[];
+  timestamp: number;
+};
+
+// types for the inbox once it's parsed
+export type ParsedConvo = {
+    convoId: number;
+    messages: ParsedMessage[];
+    lastMessageIndex: number;
+}
+
+export type ParsedMessage = {
+    sender: string;
+    message: string;
+    isRead: boolean;
+    timestamp: number; // ? is this in a different format
+}
+
+export const parseInbox = (data: RawData, user: string): ParsedConvo[] => {
+    return data.inbox.map((conversation, index) => ({
+        convoId: index,
+        messages: conversation.map(message => ({
+            sender: message.name,
+            message: message.message,
+            isRead: message.seen.includes(user),
+            timestamp: message.timestamp
+        })),
+        lastMessageIndex: 0 // GO BACK AND CALCULATE THIS BASED ON TIMESTAMPS
+    }))
+}
+
+/*
+to extra from the data for each conversation
+- messages
+    - sender
+    - message
+    - isRead?
+    - timestamp
+- lastmessageindex
+*/
