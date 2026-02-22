@@ -22,7 +22,7 @@ export type ParsedMessage = {
     sender: string;
     message: string;
     isRead: boolean;
-    timestamp: number; // ? is this in a different format
+    time: string; // ? is this in a different format
 }
 
 export const parseInbox = (data: RawData, user: string): ParsedConvo[] => {
@@ -35,7 +35,12 @@ export const parseInbox = (data: RawData, user: string): ParsedConvo[] => {
             sender: message.name,
             message: message.message,
             isRead: message.seen.includes(user),
-            timestamp: message.timestamp
+            time: new Date(message.timestamp).toLocaleDateString("en-US", {
+                hour: "numeric",
+                minute: "2-digit",
+                month: "long",
+                day: "numeric",
+            })
         })),
         lastMessageIndex: 0 // GO BACK AND CALCULATE THIS BASED ON TIMESTAMPS
     }))
