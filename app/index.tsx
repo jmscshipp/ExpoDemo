@@ -1,21 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
+import '@expo/metro-runtime'; // Necessary for Fast Refresh on Web
+import { registerRootComponent } from 'expo';
 
-export default function Index() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Home screen</Text>
-    </View>
-  );
-}
+import App from './App';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#25292e',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    color: '#fff',
-  },
-});
+registerRootComponent(App);
