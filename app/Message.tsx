@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { ParsedMessage } from './utils/parseInbox';
 
@@ -7,6 +8,8 @@ type MessageProps = {
 };
 
 export default function Message({contactName, mostRecentMessage} : MessageProps) {
+    const [isRead, setIsRead] = useState(mostRecentMessage.isRead);
+    
     return (
     <View style={styles.messageContainer}>
         <View style={styles.messageHeader}>
@@ -14,8 +17,8 @@ export default function Message({contactName, mostRecentMessage} : MessageProps)
             <Text>{mostRecentMessage.time}</Text>
         </View>
         <View style={styles.messageBody}>
-            <Text>{mostRecentMessage.sender + ":" + mostRecentMessage.message}</Text>
-            <View style={styles.unreadIcon}></View> // GO BACK AND MAKE UNREAD ICON APPEAR BASED ON READ STATUS
+            <Text>{mostRecentMessage.sender + ": " + mostRecentMessage.message}</Text>
+            {!isRead && <View style={styles.unreadIcon}></View>}
         </View>
     </View>
     );
