@@ -13,6 +13,7 @@ export type RawMessage = {
 // types for the inbox once it's parsed
 export type ParsedConvo = {
     convoId: number;
+    contactName: string;
     messages: ParsedMessage[];
     lastMessageIndex: number;
 }
@@ -26,6 +27,9 @@ export type ParsedMessage = {
 
 export const parseInbox = (data: RawData, user: string): ParsedConvo[] => {
     return data.inbox.map((conversation, index) => ({
+        // assigning contact name by including all convo participants except user
+        contactName: (conversation.map(convo => convo.name).
+        filter(name => name != user ).join(", ")),
         convoId: index,
         messages: conversation.map(message => ({
             sender: message.name,

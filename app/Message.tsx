@@ -2,14 +2,15 @@ import { StyleSheet, Text, View } from 'react-native';
 import { ParsedMessage } from './parseInbox';
 
 type MessageProps = {
-  mostRecentMessage: ParsedMessage;
+    contactName: string;
+    mostRecentMessage: ParsedMessage;
 };
 
-export default function Message({mostRecentMessage} : MessageProps) {
+export default function Message({contactName, mostRecentMessage} : MessageProps) {
     return (
     <View style={styles.messageContainer}>
         <View style={styles.messageHeader}>
-            <Text style ={styles.sender}>{mostRecentMessage.sender}</Text>
+            <Text style ={styles.sender}>{contactName}</Text>
             <Text>{mostRecentMessage.timestamp}</Text>
         </View>
         <View style={styles.messageBody}>

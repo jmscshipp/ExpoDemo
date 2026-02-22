@@ -10,14 +10,7 @@ export default function InboxScreen() {
     <FlatList
     data ={parsedData}
     keyExtractor={(item) => item.convoId.toString()}
-    renderItem={({item}) => <Message mostRecentMessage={item.messages[item.lastMessageIndex]}></Message>}>
+    renderItem={({item}) => <Message contactName={item.contactName} mostRecentMessage={item.messages[item.lastMessageIndex]}></Message>}>
     </FlatList>
   );
 }
-
-/*
-  sender: string;
-  time: string;
-  mostRecentMessage: string;
-  isRead: boolean;
-*/
