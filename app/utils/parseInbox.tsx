@@ -22,11 +22,12 @@ export type ParsedMessage = {
     sender: string;
     message: string;
     isRead: boolean;
-    time: string; // ? is this in a different format
+    time: string;
 }
 
 export const parseInbox = (data: RawData, user: string): ParsedConvo[] => {
-    return data.inbox.map((conversation, index) => ({
+    // format data into parsed convos type
+    let parsedConvos : ParsedConvo[] = data.inbox.map((conversation, index) => ({
         // assigning contact name by including all convo participants except user
         contactName: (conversation.map(convo => convo.name).
         filter(name => name != user ).join(", ")),
@@ -45,15 +46,11 @@ export const parseInbox = (data: RawData, user: string): ParsedConvo[] => {
         // comparing each message in convo by timestamp to find most recent index
         lastMessageIndex: conversation.reduce<number>((latestIndex, message, currentIndex) => {
             return message.timestamp > conversation[latestIndex].timestamp ? currentIndex : latestIndex;}, 0)
-    }))
-}
+    }));
 
-/*
-to extra from the data for each conversation
-- messages
-    - sender
-    - message
-    - isRead?
-    - timestamp
-- lastmessageindex
-*/
+    // now sort chronologically
+    return parsedConvos.sort((a, b) => { 
+        return data.inbox[b.convoId][b.lastMessageIndex].timestamp - 
+        data.inbox[a.convoId][a.lastMessageIndex].timestamp;
+    });
+}
