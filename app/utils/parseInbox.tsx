@@ -19,6 +19,7 @@ export type ParsedConvo = {
 }
 
 export type ParsedMessage = {
+    messageId: number; // this is for use with keyextractor in messaging screen
     sender: string;
     message: string;
     isRead: boolean;
@@ -32,7 +33,8 @@ export const parseInbox = (data: RawData, user: string): ParsedConvo[] => {
         contactName: (conversation.map(convo => convo.name).
         filter(name => name != user ).join(", ")),
         convoId: index,
-        messages: conversation.map(message => ({
+        messages: conversation.map((message, index) => ({
+            messageId: index,
             sender: message.name,
             message: message.message,
             isRead: message.seen.includes(user),

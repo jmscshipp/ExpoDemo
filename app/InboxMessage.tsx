@@ -1,30 +1,35 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { ParsedMessage } from './utils/parseInbox';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ParsedConvo, ParsedMessage } from './utils/parseInbox';
 
-type MessageProps = {
-    contactName: string;
-    mostRecentMessage: ParsedMessage;
+type InboxMessageProps = {
+    convo: ParsedConvo;
+    // callback to open messaging screen
+    openMessaging: (convo: ParsedConvo)=> void;
 };
 
-export default function Message({contactName, mostRecentMessage} : MessageProps) {
-    const [isRead, setIsRead] = useState(mostRecentMessage.isRead);
+export default function InboxMessage({convo, openMessaging} : InboxMessageProps) {
+    const [isRead, setIsRead] = useState(convo.messages[convo.lastMessageIndex].isRead);
+    const mostRecentMessage: ParsedMessage = convo.messages[convo.lastMessageIndex];
     
     return (
-    <View style={styles.messageContainer}>
+    <TouchableOpacity style={styles.messageContainer} onPress={()=>openMessaging(convo)}>
         <View style={styles.messageHeader}>
-            <Text style ={styles.sender}>{contactName}</Text>
-            <Text>{mostRecentMessage.time}</Text>
+            <Text style={styles.sender}>{convo.contactName}</Text>
+            <Text style={styles.grey}>{mostRecentMessage.time}</Text>
         </View>
         <View style={styles.messageBody}>
-            <Text>{mostRecentMessage.sender + ": " + mostRecentMessage.message}</Text>
+            <Text style={styles.grey}>{mostRecentMessage.sender + ": " + mostRecentMessage.message}</Text>
             {!isRead && <View style={styles.unreadIcon}></View>}
         </View>
-    </View>
+    </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
+    grey: {
+        color: 'dimgrey'
+    },
     messageContainer: {
         backgroundColor: 'white',
         padding: 12,
@@ -33,11 +38,10 @@ const styles = StyleSheet.create({
         flex: 1 / 4,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingBottom: 4
+        paddingBottom: 4,
     },
     sender: {
         fontSize: 16,
-        fontWeight: 'bold'
     },
     messageBody: {
         flex: 3 / 4,
