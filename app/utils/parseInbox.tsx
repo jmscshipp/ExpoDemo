@@ -36,13 +36,15 @@ export const parseInbox = (data: RawData, user: string): ParsedConvo[] => {
             message: message.message,
             isRead: message.seen.includes(user),
             time: new Date(message.timestamp).toLocaleDateString("en-US", {
-                hour: "numeric",
-                minute: "2-digit",
                 month: "long",
                 day: "numeric",
+                hour: "numeric",
+                minute: "2-digit",
             })
         })),
-        lastMessageIndex: 0 // GO BACK AND CALCULATE THIS BASED ON TIMESTAMPS
+        // comparing each message in convo by timestamp to find most recent index
+        lastMessageIndex: conversation.reduce<number>((latestIndex, message, currentIndex) => {
+            return message.timestamp > conversation[latestIndex].timestamp ? currentIndex : latestIndex;}, 0)
     }))
 }
 
