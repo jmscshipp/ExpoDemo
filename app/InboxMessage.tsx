@@ -12,8 +12,13 @@ export default function InboxMessage({convo, openMessaging} : InboxMessageProps)
     const [isRead, setIsRead] = useState(convo.messages[convo.lastMessageIndex].isRead);
     const mostRecentMessage: ParsedMessage = convo.messages[convo.lastMessageIndex];
     
+    function OpenMessage() {
+        setIsRead(true);
+        openMessaging(convo);
+    }
+
     return (
-    <TouchableOpacity style={styles.messageContainer} onPress={()=>openMessaging(convo)}>
+    <TouchableOpacity style={styles.messageContainer} onPress={()=>OpenMessage()}>
         <View style={styles.messageHeader}>
             <Text style={styles.sender}>{convo.contactName}</Text>
             <Text style={styles.grey}>{mostRecentMessage.time}</Text>
