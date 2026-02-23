@@ -1,8 +1,8 @@
 import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import InboxScreen from './InboxScreen';
-import MessagingScreen from './MessagingScreen';
+import InboxScreen from './screens/InboxScreen';
+import MessagingScreen from './screens/MessagingScreen';
 import { ParsedConvo } from './utils/parseInbox';
 
 export const USER_NAME: string = "Bob";

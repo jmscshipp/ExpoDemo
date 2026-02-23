@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { USER_NAME } from './App';
+import { USER_NAME } from '../App';
 type ChatMessageProps = {
     contactName: string;
     messageContent: string;

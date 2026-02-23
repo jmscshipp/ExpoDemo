@@ -1,10 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { FlatList } from 'react-native';
-import { StackParamList } from './App';
-import data from './inboxData.json';
-import InboxMessage from './InboxMessage';
-import { ParsedConvo, parseInbox } from './utils/parseInbox';
+import { StackParamList } from '../App';
+import InboxMessage from '../components/InboxMessage';
+import data from '../inboxData.json';
+import { ParsedConvo, parseInbox } from '../utils/parseInbox';
 
 export default function InboxScreen() {
     const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();

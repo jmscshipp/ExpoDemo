@@ -1,8 +1,8 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { FlatList } from 'react-native';
-import { StackParamList } from './App';
-import ChatMessage from './ChatMessage';
+import { StackParamList } from '../App';
+import ChatMessage from '../components/ChatMessage';
 
 export default function MessagingScreen() {
   const {convo} = useRoute<RouteProp<StackParamList, 'Messaging'>>().params;

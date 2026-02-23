@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ParsedConvo, ParsedMessage } from './utils/parseInbox';
+import { ParsedConvo, ParsedMessage } from '../utils/parseInbox';
 
 type InboxMessageProps = {
     convo: ParsedConvo;
