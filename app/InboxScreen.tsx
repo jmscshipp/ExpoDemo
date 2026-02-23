@@ -8,7 +8,7 @@ import { ParsedConvo, parseInbox } from './utils/parseInbox';
 
 export default function InboxScreen() {
     const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
-    const parsedData: ParsedConvo[] = parseInbox(data, "Bob");
+    const parsedData: ParsedConvo[] = parseInbox(data);
     
     return (
     <FlatList

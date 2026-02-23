@@ -1,3 +1,5 @@
+import { USER_NAME } from "../App";
+
 // types for the initial format of the JSON file
 export type RawData = {
   inbox: RawMessage[][];
@@ -26,19 +28,19 @@ export type ParsedMessage = {
     time: string;
 }
 
-export const parseInbox = (data: RawData, user: string): ParsedConvo[] => {
+export const parseInbox = (data: RawData): ParsedConvo[] => {
     // format data into parsed convos type
     let parsedConvos : ParsedConvo[] = data.inbox.map((conversation, index) => ({
         // assigning contact name by including all convo participants except user
         contactName: (conversation.map(convo => convo.name).
-        filter(name => name != user ).join(", ")),
+        filter(name => name != USER_NAME ).join(", ")),
         convoId: index,
         // sort by timestamp before mapping to ParsedMessage
         messages: conversation.sort((a, b) => {return a.timestamp - b.timestamp}).map((message, index) => ({
             messageId: index,
             sender: message.name,
             message: message.message,
-            isRead: message.seen.includes(user),
+            isRead: message.seen.includes(USER_NAME),
             time: new Date(message.timestamp).toLocaleDateString("en-US", {
                 month: "long",
                 day: "numeric",

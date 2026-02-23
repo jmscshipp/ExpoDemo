@@ -5,6 +5,8 @@ import InboxScreen from './InboxScreen';
 import MessagingScreen from './MessagingScreen';
 import { ParsedConvo } from './utils/parseInbox';
 
+export const USER_NAME: string = "Bob";
+
 // defining props for each screen
 export type StackParamList = {
   Inbox: undefined;
