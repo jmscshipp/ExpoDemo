@@ -1,4 +1,4 @@
-import { USER_NAME } from "../App";
+import { USER_NAME } from "../constants";
 
 // types for the initial format of the JSON file
 export type RawData = {

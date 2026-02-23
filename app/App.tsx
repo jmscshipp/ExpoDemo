@@ -1,11 +1,9 @@
 import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import InboxScreen from './screens/InboxScreen';
-import MessagingScreen from './screens/MessagingScreen';
-import { ParsedConvo } from './utils/parseInbox';
-
-export const USER_NAME: string = "Bob";
+import { ParsedConvo } from '../src/utils/parseInbox';
+import InboxScreen from './InboxScreen';
+import MessagingScreen from './MessagingScreen';
 
 // defining props for each screen
 export type StackParamList = {
