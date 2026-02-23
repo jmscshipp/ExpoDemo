@@ -33,7 +33,8 @@ export const parseInbox = (data: RawData, user: string): ParsedConvo[] => {
         contactName: (conversation.map(convo => convo.name).
         filter(name => name != user ).join(", ")),
         convoId: index,
-        messages: conversation.map((message, index) => ({
+        // sort by timestamp before mapping to ParsedMessage
+        messages: conversation.sort((a, b) => {return a.timestamp - b.timestamp}).map((message, index) => ({
             messageId: index,
             sender: message.name,
             message: message.message,
@@ -45,12 +46,12 @@ export const parseInbox = (data: RawData, user: string): ParsedConvo[] => {
                 minute: "2-digit",
             })
         })),
-        // comparing each message in convo by timestamp to find most recent index
+        // find most recent convo by message timestamp
         lastMessageIndex: conversation.reduce<number>((latestIndex, message, currentIndex) => {
             return message.timestamp > conversation[latestIndex].timestamp ? currentIndex : latestIndex;}, 0)
     }));
 
-    // now sort chronologically
+    // sorting convos chronologically
     return parsedConvos.sort((a, b) => { 
         return data.inbox[b.convoId][b.lastMessageIndex].timestamp - 
         data.inbox[a.convoId][a.lastMessageIndex].timestamp;
