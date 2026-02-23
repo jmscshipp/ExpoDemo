@@ -9,4 +9,4 @@ This is a basic React Native app showing messaging functionality
 - Conversations are marked read upon user opening them, and saved with React state
 - Conversations in inbox screen and messages in messaging screen are sorted chronologically by message times
 
-![Screenshot of app inbox screen](assets/expoDemoScreenshot0.png) ![Screenshot of app messaging screen](assets/expoDemoScreenshot1.png)
+![Screenshot of app inbox screen](./assets/expoDemoScreenshot0.png) ![Screenshot of app messaging screen](./assets/expoDemoScreenshot1.png)
