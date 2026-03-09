@@ -28,6 +28,16 @@ export type ParsedMessage = {
     time: string;
 }
 
+export async function getData() {
+    
+    const url = "https://khaan.backend.locasaur.com/inbox/sample";
+
+    const response = await fetch(url);
+    const result : RawData = await response.json();
+    return result;
+}
+
+
 export const parseInbox = (data: RawData): ParsedConvo[] => {
     // format data into parsed convos type
     let parsedConvos : ParsedConvo[] = data.inbox.map((conversation, index) => ({
